@@ -9,6 +9,7 @@ public class Card {
 	 * String value that holds the suit of the card
 	 */
 	private String suit;
+	private String card;
 
 	/**
 	 * String value that holds the rank of the card
@@ -69,7 +70,10 @@ public class Card {
 	 *         false otherwise.
 	 */
 	public boolean matches(Card otherCard) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 1 *** */
+		if (otherCard.pointValue() == pointValue() && otherCard.suit().equalsIgnoreCase(suit()) && otherCard.rank.equalsIgnoreCase(rank()))
+			return true;
+		else
+			return false;
 	}
 
 	/**
