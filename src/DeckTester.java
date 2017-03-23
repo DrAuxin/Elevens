@@ -15,6 +15,6 @@ public class DeckTester {
 		int[] pointValues = {11, 12, 13};
 
 		Deck d = new Deck(ranks, suits, pointValues);
-		System.out.println(d.size());
+		System.out.println(d);
 	}
 }
