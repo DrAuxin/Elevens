@@ -19,7 +19,7 @@ public class Shuffler {
 								 " consecutive perfect shuffles:");
 		int[] values1 = {0, 1, 2, 3};
 		for (int j = 1; j <= SHUFFLE_COUNT; j++) {
-			values1 = perfectShuffle(values1);
+			perfectShuffle(values1);
 			System.out.print("  " + j + ":");
 			for (int k = 0; k < values1.length; k++) {
 				System.out.print(" " + values1[k]);
@@ -49,21 +49,8 @@ public class Shuffler {
 	 * the cards in one half with the cards in the other.
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
-	public static int[] perfectShuffle(int[] values) {
-		int[] shuffled = new int[values.length];
-		int k = 0;
-		for (int j = 0; j <(values.length+1)/2; j++)
-		{
-			shuffled[k] = values[j];
-			k = k + 2;
-		}
-		k = 1;
-		for (int j = (values.length+1)/2; j < values.length; j++)
-		{
-			shuffled[k] = values[j];
-			k = k + 2;
-		}
-		return shuffled;
+	public static void perfectShuffle(int[] values) {
+		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
 	}
 
 	/**
@@ -77,16 +64,7 @@ public class Shuffler {
 	 * searching for an as-yet-unselected card.
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
-	public static int[] selectionShuffle(int[] values) {
-		int x = 0;
-		int y = 0;
-		for (int k = values.length-1; k >= 0; k--)
-		{
-			x = (int)((k+1) * Math.random());
-			y = values[k];
-			values[k] = values[x];
-			values[x] = y;
-		}
-		return values;
+	public static void selectionShuffle(int[] values) {
+		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
 	}
 }
