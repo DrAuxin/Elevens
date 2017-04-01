@@ -53,7 +53,9 @@ public class ElevensBoard extends Board {
 	 */
 	@Override
 	public boolean isLegal(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		if (containsJQK(selectedCards)||containsPairSum11(selectedCards))
+			return true;
+		return false;
 	}
 
 	/**
@@ -66,7 +68,29 @@ public class ElevensBoard extends Board {
 	 */
 	@Override
 	public boolean anotherPlayIsPossible() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		List<Integer> inplay = cardIndexes();
+		for (int b = 0; b < inplay.size(); b++)
+			for (int c = b + 1; c < inplay.size(); c++)
+				if (cards[inplay.get(b)].pointValue()+cards[inplay.get(c)].pointValue()==11)
+					return true;
+		int sum = 0;
+		int k = 0;
+		int j = 0;
+		int q = 0;
+		for (int a = 0; a < inplay.size(); a++)
+		{
+			if(cards[inplay.get(a)].rank().equalsIgnoreCase("jack"))
+				j = 1;
+			if(cards[inplay.get(a)].rank().equalsIgnoreCase("queen"))
+				q = 1;
+			if(cards[inplay.get(a)].rank().equalsIgnoreCase("king"))
+				k = 1;
+		}
+		if(j>=1&&q>=1&&k>=1)
+			return true;
+		return false;
+
+
 	}
 
 	/**
@@ -78,7 +102,15 @@ public class ElevensBoard extends Board {
 	 *              contain an 11-pair; false otherwise.
 	 */
 	private boolean containsPairSum11(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		int sum = 0;
+		for (int a = 0; a < selectedCards.size(); a++)
+		{
+			sum = sum + cards[selectedCards.get(a)].pointValue();
+		}
+		if(sum==11)
+			return true;
+		return false;
+
 	}
 
 	/**
@@ -90,6 +122,22 @@ public class ElevensBoard extends Board {
 	 *              include a jack, a queen, and a king; false otherwise.
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		int sum = 0;
+		int k = 0;
+		int j = 0;
+		int q = 0;
+		for (int a = 0; a < selectedCards.size(); a++)
+		{
+			if(cards[selectedCards.get(a)].rank().equalsIgnoreCase("jack"))
+				j = 1;
+			if(cards[selectedCards.get(a)].rank().equalsIgnoreCase("queen"))
+				q = 1;
+			if(cards[selectedCards.get(a)].rank().equalsIgnoreCase("king"))
+				k = 1;
+		}
+		if(j>=1&&q>=1&&k>=1)
+			return true;
+		return false;
+
 	}
 }

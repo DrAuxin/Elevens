@@ -11,7 +11,7 @@ public class Deck {
 	/**
 	 * cards contains all the cards in the deck.
 	 */
-	private List<Card> cards;
+	public List<Card> cards;
 
 	/**
 	 * size is the number of not-yet-dealt cards.
@@ -31,12 +31,13 @@ public class Deck {
 	 */
 	public Deck(String[] ranks, String[] suits, int[] values) {
 		cards = new ArrayList<Card>();
-		for (int a = 0; a < suits.length; a++)
-			for (int b = 0; b < ranks.length; b++) {
-				cards.add(new Card(ranks[b], suits[a], values[b]));
+		for (int j = 0; j < ranks.length; j++) {
+			for (String suitString : suits) {
+				cards.add(new Card(ranks[j], suitString, values[j]));
 			}
+		}
 		size = cards.size();
-		cards = shuffle(cards);
+		shuffle();
 	}
 
 
@@ -45,10 +46,7 @@ public class Deck {
 	 * @return true if this deck is empty, false otherwise.
 	 */
 	public boolean isEmpty() {
-		if (size == 0)
-			return true;
-		else
-			return false;
+		return size == 0;
 	}
 
 	/**
@@ -63,17 +61,16 @@ public class Deck {
 	 * Randomly permute the given collection of cards
 	 * and reset the size to represent the entire deck.
 	 */
-	public List<Card> shuffle(List<Card> values) {
-		int x = 0;
-		Card y;
-		for (int k = values.size()-1; k >= 0; k--)
-		{
-			x = (int)((k+1) * Math.random());
-			y = values.get(k);
-			values.set(k, values.get(x));
-			values.set(x, y);
+	public void shuffle() {
+		for (int k = cards.size() - 1; k > 0; k--) {
+			int howMany = k + 1;
+			int start = 0;
+			int randPos = (int) (Math.random() * howMany) + start;
+			Card temp = cards.get(k);
+			cards.set(k, cards.get(randPos));
+			cards.set(randPos, temp);
 		}
-		return values;
+		size = cards.size();
 	}
 
 	/**
@@ -82,8 +79,12 @@ public class Deck {
 	 *         previously dealt.
 	 */
 	public Card deal() {
+		if (isEmpty()) {
+			return null;
+		}
 		size--;
-		return cards.get(size);
+		Card c = cards.get(size);
+		return c;
 	}
 
 	/**
